@@ -190,18 +190,7 @@ ax.pie(sentiment_values, labels=sentiment_labels, autopct='%1.1f%%', startangle=
 ax.set_title('Sentiment Distribution')
 st.pyplot(fig)
 
-# Part-of-Speech Tagging (Bar Chart)
-st.subheader("Part-of-Speech Tagging")
-pos_tags = [TextBlob(sentence).tags for sentence in sentences]
-pos_flat = [tag for sublist in pos_tags for tag in sublist]
-pos_freq = Counter(tag[1] for tag in pos_flat)
 
-fig, ax = plt.subplots(figsize=(10, 5))
-sns.barplot(x=list(pos_freq.keys()), y=list(pos_freq.values()), palette=bright_colors, ax=ax)
-ax.set_xlabel('Part-of-Speech Tags')
-ax.set_ylabel('Frequency')
-plt.xticks(rotation=45)
-st.pyplot(fig)
 
 # Word Length Distribution (Histogram)
 st.subheader("Word Length Distribution")
