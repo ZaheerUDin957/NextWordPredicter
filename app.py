@@ -6,7 +6,6 @@ from tensorflow.keras.layers import Dense, LSTM, Embedding, Input, Layer
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import Model
-import matplotlib.pyplot as plt
 
 # Display the original training corpus
 st.title("Text Generation using LSTM with Attention")
@@ -189,26 +188,6 @@ st.write("Training... (This may take a while depending on your system)")
 history = model.fit(X, y, epochs=50, verbose=1)
 
 st.write("Training completed!")
-
-# Plotting the training history
-st.subheader("Training History")
-fig, ax = plt.subplots(2, 1, figsize=(10, 6))
-
-# Plot the loss
-ax[0].plot(history.history['loss'], label='Loss')
-ax[0].set_title('Loss over Epochs')
-ax[0].set_xlabel('Epochs')
-ax[0].set_ylabel('Loss')
-ax[0].legend()
-
-# Plot the accuracy
-ax[1].plot(history.history['accuracy'], label='Accuracy')
-ax[1].set_title('Accuracy over Epochs')
-ax[1].set_xlabel('Epochs')
-ax[1].set_ylabel('Accuracy')
-ax[1].legend()
-
-st.pyplot(fig)
 
 # Prediction Function
 def predict_next_word(seed_text, next_words=2):
