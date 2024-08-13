@@ -104,7 +104,7 @@ def predict_next_word(seed_text, next_words=2):
 
 # Input Box for User Input
 st.subheader("Generate Text")
-user_input = st.text_input("Enter a seed text:", "Machine Learning can improve")
+user_input = st.text_input("Enter a seed text:", "Machine learning algorithms")
 num_words = st.slider("Number of words to predict:", 1, 10, 2)
 
 if st.button("Generate"):
