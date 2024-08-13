@@ -1,3 +1,7 @@
 streamlit
 numpy
 tensorflow
+matplotlib
+wordcloud
+nltk
+seaborn
