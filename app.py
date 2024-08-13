@@ -12,6 +12,14 @@ from collections import Counter
 import seaborn as sns
 from textblob import TextBlob
 bright_colors = ['#FF1493', '#00FFFF', '#FF4500', '#7FFF00', '#9932CC', '#00CED1', '#FFD700']
+
+# Set up Streamlit page configuration
+st.set_page_config(
+    page_title="NextWordPredictor",  # Title of the page
+    page_icon=":book:",  # Icon for the page, you can use emoji or path to an image file
+    layout="wide"  # Use wide layout for the page
+)
+
 # Display the original training corpus
 st.title("Text Generation using LSTM with Attention")
 st.subheader("Original Training Corpus")
