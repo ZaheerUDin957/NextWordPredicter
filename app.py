@@ -11,7 +11,7 @@ from wordcloud import WordCloud
 from collections import Counter
 import seaborn as sns
 from textblob import TextBlob
-
+bright_colors = ['#FF1493', '#00FFFF', '#FF4500', '#7FFF00', '#9932CC', '#00CED1', '#FFD700']
 # Display the original training corpus
 st.title("Text Generation using LSTM with Attention")
 st.subheader("Original Training Corpus")
