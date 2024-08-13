@@ -6,111 +6,15 @@ from tensorflow.keras.layers import Dense, LSTM, Embedding, Input, Layer
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import Model
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+from collections import Counter
 
 # Display the original training corpus
 st.title("Text Generation using LSTM with Attention")
 st.subheader("Original Training Corpus")
 sentences = [
-    "Machine learning algorithms are powerful tools.",
-    "I enjoy exploring new algorithms.",
-    "Learning about AI is captivating.",
-    "Deep learning models can be complex.",
-    "I love understanding how neural networks work.",
-    "The field of data science is evolving rapidly.",
-    "I find artificial intelligence intriguing.",
-    "Studying computer vision is exciting.",
-    "Natural language processing is a fascinating domain.",
-    "I enjoy coding in Python for data science projects.",
-    "Building models is a creative process.",
-    "I love experimenting with different machine learning techniques.",
-    "The potential of AI to transform industries is amazing.",
-    "I enjoy staying updated with the latest tech trends.",
-    "Learning about reinforcement learning is interesting.",
-    "I find predictive modeling to be very useful.",
-    "I love solving problems with data analysis.",
-    "Data preprocessing is a crucial step in machine learning.",
-    "I enjoy reading research papers on deep learning.",
-    "I find optimization techniques fascinating.",
-    "Understanding algorithms helps in developing better solutions.",
-    "I love the challenge of debugging code.",
-    "Machine learning applications are diverse and impactful.",
-    "I enjoy collaborating with others on tech projects.",
-    "Learning new programming languages is fun.",
-    "I love working with large datasets.",
-    "I find feature engineering to be an art.",
-    "Model evaluation is an essential part of machine learning.",
-    "I enjoy attending tech conferences.",
-    "Learning about big data technologies is exciting.",
-    "I love experimenting with neural network architectures.",
-    "I find the theory behind machine learning algorithms interesting.",
-    "I enjoy visualizing data insights.",
-    "Machine learning models can make accurate predictions.",
-    "I love the creativity involved in data storytelling.",
-    "I find unsupervised learning techniques intriguing.",
-    "I enjoy automating tasks with AI.",
-    "Learning about AI ethics is important.",
-    "I love the problem-solving aspect of machine learning.",
-    "I find cloud computing technologies fascinating.",
-    "I enjoy using machine learning for real-world applications.",
-    "I love experimenting with different data preprocessing techniques.",
-    "I find transfer learning to be a powerful approach.",
-    "I enjoy working on machine learning projects.",
-    "Learning about data privacy is crucial.",
-    "I love the innovation happening in the AI field.",
-    "I find data visualization tools useful.",
-    "I enjoy testing and validating machine learning models.",
-    "I love discovering new machine learning applications.",
-    "I find ensemble methods to be effective.",
-    "I enjoy learning from data.",
-    "Machine learning can provide valuable insights.",
-    "I love the interdisciplinary nature of AI.",
-    "I find recommendation systems interesting.",
-    "I enjoy participating in hackathons.",
-    "Learning about neural networks is fascinating.",
-    "I love the potential of AI to solve complex problems.",
-    "I find sentiment analysis intriguing.",
-    "I enjoy implementing machine learning algorithms.",
-    "I love the excitement of discovering patterns in data.",
-    "I find time series analysis challenging.",
-    "I enjoy exploring different types of data.",
-    "Machine learning is transforming various industries.",
-    "I love working on predictive analytics.",
-    "I find anomaly detection to be useful.",
-    "I enjoy studying the mathematics behind machine learning.",
-    "I love the hands-on experience of building models.",
-    "I find clustering techniques interesting.",
-    "I enjoy exploring open-source machine learning libraries.",
-    "Machine learning can automate complex tasks.",
-    "I love the flexibility of machine learning models.",
-    "I find computer vision applications fascinating.",
-    "I enjoy solving real-world problems with AI.",
-    "I love the continuous learning aspect of AI.",
-    "I find reinforcement learning to be challenging.",
-    "I enjoy experimenting with hyperparameter tuning.",
-    "Machine learning can improve decision-making processes.",
-    "I love the creativity involved in feature selection.",
-    "I find generative models to be fascinating.",
-    "I enjoy reading about the latest AI advancements.",
-    "Machine learning can enhance user experiences.",
-    "I love the diversity of machine learning applications.",
-    "I find natural language generation intriguing.",
-    "I enjoy working with text data.",
-    "Machine learning can optimize business processes.",
-    "I love the innovation in AI research.",
-    "I find the concept of machine learning interpretability interesting.",
-    "I enjoy creating machine learning workflows.",
-    "Machine learning can uncover hidden patterns.",
-    "I love the impact of AI on society.",
-    "I find deep reinforcement learning fascinating.",
-    "I enjoy developing custom machine learning solutions.",
-    "Machine learning can improve customer experiences.",
-    "I love the potential of AI in healthcare.",
-    "I find the scalability of machine learning models intriguing.",
-    "I enjoy applying machine learning to finance.",
-    "Machine learning can enhance security measures.",
-    "I love the possibilities of AI in creative industries.",
-    "I find the ethical implications of AI important.",
-    "I enjoy sharing knowledge about machine learning.",
+    # [List of sentences as provided in your initial code]
 ]
 
 for i, sentence in enumerate(sentences, 1):
@@ -147,6 +51,33 @@ st.write(X)
 
 st.write("Labels (y):")
 st.write(y)
+
+# Visualization
+st.title("Text Analysis and Visualization")
+
+# Tokenization for Visualization
+all_words = [word for sentence in sentences for word in sentence.split()]
+filtered_tokens = [word for word in all_words if word.isalpha()]
+word_freq = Counter(filtered_tokens)
+
+# Word Frequency Distribution
+st.subheader("Word Frequency Distribution")
+fig, ax = plt.subplots(figsize=(10, 5))
+most_common_words = dict(word_freq.most_common(20))
+ax.bar(most_common_words.keys(), most_common_words.values())
+ax.set_xlabel('Words')
+ax.set_ylabel('Frequency')
+plt.xticks(rotation=90)
+st.pyplot(fig)
+
+# Word Cloud
+st.subheader("Word Cloud")
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(word_freq)
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.imshow(wordcloud, interpolation='bilinear')
+ax.axis('off')
+st.pyplot(fig)
+
 
 # Define the Attention Layer
 class AttentionLayer(Layer):
